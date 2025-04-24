@@ -1,0 +1,32 @@
+{% extends "base/index.html" %}
+
+{% block title %}Upload Document{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Upload PDF or Word Document</h2>
+<form method="post" enctype="multipart/form-data" class="mb-4">
+  {% csrf_token %}
+  {{ form.file.label_tag }} <br>
+  {{ form.file }}
+  <button type="submit" class="btn btn-primary mt-2">Upload</button>
+</form>
+
+{% if file_info.name %}
+<div class="alert alert-info">
+  <strong>File Name:</strong> {{ file_info.name }}<br>
+  <strong>File Size:</strong> {{ file_info.size }} KB
+</div>
+{% endif %}
+
+{% if text %}
+<div class="mb-3">
+  <h5>Extracted Content:</h5>
+  <textarea class="form-control" rows="12" readonly>{{ text }}</textarea>
+</div>
+<form method="post" action="{% url 'summarize_text' %}">
+  {% csrf_token %}
+  <input type="hidden" name="content" value="{{ text|escape }}">
+  <button class="btn btn-success">Summarize</button>
+</form>
+{% endif %}
+{% endblock %}
