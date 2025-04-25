@@ -1,7 +1,7 @@
 from django.shortcuts import render , HttpResponse
 import os
-import pdfplumber
-import docx
+import pdfplumber # type: ignore
+import docx # type: ignore
 from django.shortcuts import render
 from .forms import DocumentForm
 

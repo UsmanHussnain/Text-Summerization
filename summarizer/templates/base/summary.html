@@ -1,26 +1,24 @@
 {% extends "base/index.html" %}
-
 {% block title %}Summary Result{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">AI Summary</h2>
+<h2 class="mb-4 text-success">🧠 AI Summary</h2>
 
 <div class="mb-3">
-  <h5>Summary:</h5>
-  <textarea class="form-control" rows="8" readonly>{{ summary }}</textarea>
+    <h5>Summary:</h5>
+    <textarea class="form-control shadow-sm" rows="8" readonly>{{ summary }}</textarea>
 </div>
 
-<div class="mb-4">
-  <a href="{% url 'index' %}" class="btn btn-secondary">Go Back</a>
-  <button class="btn btn-success" onclick="copySummary()">Copy</button>
-  <a href="{% url 'download_summary' %}?summary={{ summary|urlencode }}" class="btn btn-info">Download .txt</a>
+<div class="mb-4 d-flex gap-2">
+    <a href="{% url 'index' %}" class="btn btn-secondary">↩️ Go Back</a>
+    <button class="btn btn-success" onclick="copySummary()">📋 Copy</button>
+    <a href="{% url 'download_summary' %}?summary={{ summary|urlencode }}" class="btn btn-info">⬇️ Download .txt</a>
 </div>
 
 <script>
 function copySummary() {
-  navigator.clipboard.writeText(`{{ summary }}`);
-  alert("Summary copied to clipboard!");
+    navigator.clipboard.writeText(`{{ summary }}`);
+    alert("Summary copied to clipboard!");
 }
 </script>
 {% endblock %}
-
